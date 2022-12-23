@@ -2,35 +2,42 @@ import Heap
 import Queue
 
 public struct MaximumPriorityQueue<Element> {
-  var _storage: Heap<Element>
+  @usableFromInline
+  var storage: Heap<Element>
   
+  @inlinable @inline(__always)
   public init(
     orderedBy areInAscendingOrder:
       @escaping (Element, Element) -> Bool
   ) {
-    _storage = Heap(orderedBy: areInAscendingOrder)
+    storage = Heap(orderedBy: areInAscendingOrder)
   }
 }
 
 extension MaximumPriorityQueue: Queue {
+  @inlinable @inline(__always)
   public var isEmpty: Bool {
-    _storage.isEmpty
+    storage.isEmpty
   }
   
+  @inlinable @inline(__always)
   public var count: Int {
-    _storage.count
+    storage.count
   }
   
+  @inlinable @inline(__always)
   public var front: Element? {
-    _storage.max
+    storage.max
   }
   
+  @inlinable @inline(__always)
   public mutating func enqueue(_ newElement: Element) {
-    _storage.insert(newElement)
+    storage.insert(newElement)
   }
   
+  @inlinable @inline(__always)
   public mutating func dequeue() -> Element? {
-    _storage.popMax()
+    storage.popMax()
   }
 }
 
